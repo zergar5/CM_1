@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{f79c6d6d-9b22-4764-abc3-15f7d666648a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools">
+      <UniqueIdentifier>{a98f5184-80ef-49df-9fdb-daa46abea3dc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="profile_matrix.txt" />
+    <Text Include="vector.txt" />
+    <Text Include="output.txt" />
+    <Text Include="profile_matrix2.txt" />
+    <Text Include="random_matrix.txt" />
+    <Text Include="Matrixk\matrixk^0.txt" />
+    <Text Include="Matrixk\matrixk^1.txt" />
+    <Text Include="Matrixk\matrixk^2.txt" />
+    <Text Include="Matrixk\matrixk^3.txt" />
+    <Text Include="Matrixk\matrixk^4.txt" />
+    <Text Include="Matrixk\matrixk^5.txt" />
+    <Text Include="Matrixk\matrixk^6.txt" />
+    <Text Include="Matrixk\matrixk^7.txt" />
+    <Text Include="Matrixk\matrixk^8.txt" />
+    <Text Include="Matrixk\matrixk^9.txt" />
+    <Text Include="Matrixk\matrixk^10.txt" />
+    <Text Include="Matrixk\matrixk^11.txt" />
+    <Text Include="Matrixk\matrixk^12.txt" />
+    <Text Include="Matrixk\matrixk^13.txt" />
+    <Text Include="Matrixk\matrixk^14.txt" />
+    <Text Include="Fk\Fk^0.txt" />
+    <Text Include="Fk\Fk^1.txt" />
+    <Text Include="Fk\Fk^2.txt" />
+    <Text Include="Fk\Fk^3.txt" />
+    <Text Include="Fk\Fk^4.txt" />
+    <Text Include="Fk\Fk^5.txt" />
+    <Text Include="Fk\Fk^6.txt" />
+    <Text Include="Fk\Fk^7.txt" />
+    <Text Include="Fk\Fk^8.txt" />
+    <Text Include="Fk\Fk^9.txt" />
+    <Text Include="Fk\Fk^10.txt" />
+    <Text Include="Fk\Fk^11.txt" />
+    <Text Include="Fk\Fk^12.txt" />
+    <Text Include="Fk\Fk^13.txt" />
+    <Text Include="Fk\Fk^14.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Solve.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix.hpp">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="FileManager.hpp">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="MatrixManager.hpp">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="SolveSLAE.hpp">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorManager.hpp">
+      <Filter>Tools</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
