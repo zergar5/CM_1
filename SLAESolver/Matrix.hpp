@@ -6,6 +6,7 @@
 template<typename real>
 class Matrix
 {
+protected:
    int n;
 
    std::vector<int> ia;
@@ -22,7 +23,7 @@ public:
       this->au = std::vector<real>();
    }
 
-   void MemoryAllocation(std::string fileName)
+   virtual void MemoryAllocation(std::string fileName)
    {
       MatrixManager<Matrix<real>> matrix;
       matrix.Reader(*this, fileName);
@@ -31,34 +32,43 @@ public:
    template<typename realSum>
    void LDUDecomposition()
    {
+      real eps = 0;
+      if (typeid(real) == typeid(float))
+      {
+         eps = FLT_EPSILON;
+      }
+      else
+      {
+         eps = DBL_EPSILON;
+      }
       for (auto element : di)
       {
-         if (abs(element) < FLT_EPSILON)
+         if (abs(element) < eps)
          {
-            throw std::exception(u8"Нельзя разложить матрицу в LDU, так как на диагонали присутствует 0");
+            throw std::exception(u8"Матрица не разложима");
          }
       }
       for (int i = 0; i < n; i++)
       {
-         int current_row_amount = ia[i];
-         int next_row_amount = ia[i + 1];
-         int j = i - (next_row_amount - current_row_amount); //с какого j начинается i-ия строка/столбец
+         int i0 = ia[i];
+         int i1 = ia[i + 1];
+         int j = i - (i1 - i0);
          realSum sum_d = 0;
 
-         for (int ij = current_row_amount; ij < next_row_amount; ij++, j++)
+         for (int ij = i0; ij < i1; ij++, j++)
          {
             realSum sum_l = 0;
             realSum sum_u = 0;
 
-            int current_column_amount = ia[j];
-            int next_column_amount = ia[j + 1];
+            int j0 = ia[j];
+            int j1 = ia[j + 1];
 
-            int ik = current_row_amount;
-            int kk = i - (next_row_amount - current_row_amount);
-            int kj = current_column_amount;
+            int ik = i0;
+            int kk = i - (i1 - i0);
+            int kj = j0;
 
-            int column_i = ij - current_row_amount;
-            int column_j = next_column_amount - current_column_amount;
+            int column_i = ij - i0;
+            int column_j = j1 - j0;
             int column_ij = column_i - column_j;
 
             if (column_ij < 0)
@@ -69,17 +79,16 @@ public:
                kk += column_ij;
             }
 
-            for (; ik < ij; ik++, kk++, kj++) //сумма по l и u
+            for (; ik < ij; ik++, kk++, kj++)
             {
                sum_l += al[ik] * au[kj] * di[kk];
                sum_u += al[kj] * au[ik] * di[kk];
             }
-            //эти 3 цикла вроде верные
             al[ij] = (al[ij] - sum_l) / di[j];
             au[ij] = (au[ij] - sum_u) / di[j];
             sum_d += al[ij] * au[ij] * di[j];
          }
-         if (abs(di[i] - sum_d) < FLT_EPSILON)
+         if (abs(di[i] - sum_d) < eps)
          {
             throw std::exception(u8"Нельзя разложить матрицу в LDU, так как на диагонали присутствует 0");
          }
@@ -92,47 +101,47 @@ public:
       this->n = n;
    }
 
-   int getSize()
+   int& getSize()
    {
       return this->n;
    }
 
-   void setIA(std::vector<int> &ia)
+   void setIA(std::vector<int>& ia)
    {
       this->ia = ia;
    }
 
-   std::vector<int> getIA()
+   std::vector<int>& getIA()
    {
       return this->ia;
    }
 
-   void setDI(std::vector<real> &di)
+   void setDI(std::vector<real>& di)
    {
       this->di = di;
    }
 
-   std::vector<real> getDI()
+   std::vector<real>& getDI()
    {
       return this->di;
    }
 
-   void setAL(std::vector<real> &al)
+   void setAL(std::vector<real>& al)
    {
       this->al = al;
    }
 
-   std::vector<real> getAL()
+   std::vector<real>& getAL()
    {
       return this->al;
    }
 
-   void setAU(std::vector<real> &au)
+   void setAU(std::vector<real>& au)
    {
       this->au = au;
    }
 
-   std::vector<real> getAU()
+   std::vector<real>& getAU()
    {
       return this->au;
    }

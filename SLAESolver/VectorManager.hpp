@@ -8,10 +8,9 @@ template<class T>
 class VectorManager : FileManager<T>
 {
 public:
-   virtual void Reader(T &obj, std::string fileName) { }
-   void Reader(T &obj, std::string fileNameForSize, std::string fileName) override
+   virtual void Reader(T& obj, std::string fileName) { }
+   void Reader(T& obj, std::string fileNameForSize, std::string fileName) override
    {
-
       int n = 0;
       try
       {
@@ -21,7 +20,7 @@ public:
       }
       catch (...)
       {
-         std::cout << "Error with size file" << std::endl;
+         throw "Error with size file";
       }
       try
       {
@@ -33,11 +32,11 @@ public:
       }
       catch (...)
       {
-         std::cout << "Error with vector file" << std::endl;
+         throw "Error with vector file";
       }
    }
 
-   void Writer(T &obj, std::string fileName, int precision) override
+   void Writer(T& obj, std::string fileName, int precision) override
    {
       auto vec_out = std::ofstream(fileName);
       vec_out << std::fixed << std::setprecision(precision + 1);

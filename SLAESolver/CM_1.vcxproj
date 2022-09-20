@@ -106,6 +106,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -132,36 +133,6 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Fk\Fk^0.txt" />
-    <Text Include="Fk\Fk^1.txt" />
-    <Text Include="Fk\Fk^10.txt" />
-    <Text Include="Fk\Fk^11.txt" />
-    <Text Include="Fk\Fk^12.txt" />
-    <Text Include="Fk\Fk^13.txt" />
-    <Text Include="Fk\Fk^14.txt" />
-    <Text Include="Fk\Fk^2.txt" />
-    <Text Include="Fk\Fk^3.txt" />
-    <Text Include="Fk\Fk^4.txt" />
-    <Text Include="Fk\Fk^5.txt" />
-    <Text Include="Fk\Fk^6.txt" />
-    <Text Include="Fk\Fk^7.txt" />
-    <Text Include="Fk\Fk^8.txt" />
-    <Text Include="Fk\Fk^9.txt" />
-    <Text Include="Matrixk\matrixk^0.txt" />
-    <Text Include="Matrixk\matrixk^1.txt" />
-    <Text Include="Matrixk\matrixk^10.txt" />
-    <Text Include="Matrixk\matrixk^11.txt" />
-    <Text Include="Matrixk\matrixk^12.txt" />
-    <Text Include="Matrixk\matrixk^13.txt" />
-    <Text Include="Matrixk\matrixk^14.txt" />
-    <Text Include="Matrixk\matrixk^2.txt" />
-    <Text Include="Matrixk\matrixk^3.txt" />
-    <Text Include="Matrixk\matrixk^4.txt" />
-    <Text Include="Matrixk\matrixk^5.txt" />
-    <Text Include="Matrixk\matrixk^6.txt" />
-    <Text Include="Matrixk\matrixk^7.txt" />
-    <Text Include="Matrixk\matrixk^8.txt" />
-    <Text Include="Matrixk\matrixk^9.txt" />
     <Text Include="output.txt" />
     <Text Include="profile_matrix.txt" />
     <Text Include="profile_matrix2.txt" />
@@ -170,9 +141,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileManager.hpp" />
+    <ClInclude Include="GilbertMatrix.hpp" />
     <ClInclude Include="Matrix.hpp" />
+    <ClInclude Include="MatrixK.hpp" />
     <ClInclude Include="MatrixManager.hpp" />
     <ClInclude Include="Solve.hpp" />
+    <ClInclude Include="SolveGilbert.hpp" />
+    <ClInclude Include="SolveK.hpp" />
     <ClInclude Include="SolveSLAE.hpp" />
     <ClInclude Include="VectorManager.hpp" />
   </ItemGroup>

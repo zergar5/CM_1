@@ -1,15 +1,16 @@
 #pragma once
-#include "Matrix.hpp"
+#include "Matrixk.hpp"
 #include "SolveSLAE.hpp"
 #include "VectorManager.hpp"
 #include <iostream>
 
 template <typename real>
-void Solve()
+void SolveK()
 {
    while (true)
    {
       int p = 0;
+
       std::cout << u8"Выберите точность суммы: " << std::endl
          << u8"1. float" << std::endl
          << u8"2. double" << std::endl
@@ -28,10 +29,15 @@ void Solve()
          std::string vector_file_name;
          std::cin >> vector_file_name;
 
-         Matrix<real> profile_matrix = Matrix<real>();
+         std::cout << u8"Введите k" << std::endl;
+         int k = 0;
+         std::cin >> k;
+
+         MatrixK<real> matrix_k = MatrixK<real>();
+         matrix_k.setK(k);
          try
          {
-            profile_matrix.MemoryAllocation(matrix_file_name + ".txt");
+            matrix_k.MemoryAllocation(matrix_file_name + ".txt");
          }
          catch (const char* msg)
          {
@@ -50,21 +56,22 @@ void Solve()
             std::cout << msg << std::endl;
             return;
          }
+         vector_b[0] += pow(10.0, -k);
 
          std::vector<real> vector_x;
 
-         profile_matrix.LDUDecomposition<float>();
+         matrix_k.LDUDecomposition<float>();
 
          SolveSLAE<float> solve_slae;
-         vector_x = solve_slae.Solve(profile_matrix, vector_b);
+         vector_x = solve_slae.Solve(matrix_k, vector_b);
 
          if (typeid(real) == typeid(float))
          {
-            vector_manager.Writer(vector_x, "output.txt", 7);
+            vector_manager.Writer(vector_x, "outputK" + std::to_string(k) + ".txt", 7);
          }
          else
          {
-            vector_manager.Writer(vector_x, "outputK.txt", 15);
+            vector_manager.Writer(vector_x, "outputK" + std::to_string(k) + ".txt", 15);
          }
 
          break;
@@ -79,10 +86,15 @@ void Solve()
          std::string vector_file_name;
          std::cin >> vector_file_name;
 
-         Matrix<real> profile_matrix = Matrix<real>();
+         std::cout << u8"Введите k" << std::endl;
+         int k = 0;
+         std::cin >> k;
+
+         MatrixK<real> matrix_k = MatrixK<real>();
+         matrix_k.setK(k);
          try
          {
-            profile_matrix.MemoryAllocation(matrix_file_name + ".txt");
+            matrix_k.MemoryAllocation(matrix_file_name + ".txt");
          }
          catch (const char* msg)
          {
@@ -101,21 +113,22 @@ void Solve()
             std::cout << msg << std::endl;
             return;
          }
+         vector_b[0] += pow(10.0, -k);
 
          std::vector<real> vector_x;
 
-         profile_matrix.LDUDecomposition<double>();
+         matrix_k.LDUDecomposition<double>();
 
          SolveSLAE<double> solve_slae;
-         vector_x = solve_slae.Solve(profile_matrix, vector_b);
+         vector_x = solve_slae.Solve(matrix_k, vector_b);
 
          if (typeid(real) == typeid(float))
          {
-            vector_manager.Writer(vector_x, "output.txt", 7);
+            vector_manager.Writer(vector_x, "outputK" + std::to_string(k) + ".txt", 7);
          }
          else
          {
-            vector_manager.Writer(vector_x, "output.txt", 15);
+            vector_manager.Writer(vector_x, "outputK" + std::to_string(k) + ".txt", 15);
          }
 
          break;
