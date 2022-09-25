@@ -1,7 +1,7 @@
 ﻿#include <iostream>
-#include "Solve.hpp"
-#include "SolveK.hpp"
-#include "SolveGilbert.hpp"
+#include "solve.hpp"
+#include "solve_gilbert.hpp"
+#include "solve_gauss.hpp"
 #include <Windows.h>
 
 int main()
@@ -14,10 +14,9 @@ int main()
       int m = 0;
       std::cout << u8"Выберите способ решения: " << std::endl
          << u8"1. Разложение профильной матрицы" << std::endl
-         << u8"2. Разложение профильной матрицы с k" << std::endl
-         << u8"3. Разложение матрицы Гильберта" << std::endl
-         //<< u8"4. Метод Гаусса" << std::endl
-         << u8"5. Выход из программы" << std::endl;
+         << u8"2. Разложение матрицы Гильберта" << std::endl
+         << u8"3. Метод Гаусса" << std::endl
+         << u8"4. Выход из программы" << std::endl;
       std::cin >> m;
 
       switch (m)
@@ -36,12 +35,12 @@ int main()
             {
             case 1:
             {
-               Solve<float>();
+               solve<float>();
                break;
             }
             case 2:
             {
-               Solve<double>();
+               solve<double>();
                break;
             }
             case 3:
@@ -55,7 +54,6 @@ int main()
          }
       }
       case 2:
-      {
          while (true)
          {
             int p = 0;
@@ -68,12 +66,12 @@ int main()
             {
             case 1:
             {
-               SolveK<float>();
+               solve_gilbert<float>();
                break;
             }
             case 2:
             {
-               SolveK<double>();
+               solve_gilbert<double>();
                break;
             }
             case 3:
@@ -85,8 +83,8 @@ int main()
             }
             }
          }
-      }
       case 3:
+      {
          while (true)
          {
             int p = 0;
@@ -95,16 +93,17 @@ int main()
                << u8"2. double" << std::endl
                << u8"3. Выход в меню выбора способа" << std::endl;
             std::cin >> p;
+
             switch (p)
             {
             case 1:
             {
-               SolveGilbert<float>();
+               solve_gauss<float>();
                break;
             }
             case 2:
             {
-               SolveGilbert<double>();
+               solve_gauss<double>();
                break;
             }
             case 3:
@@ -116,9 +115,6 @@ int main()
             }
             }
          }
-      case 4:
-      {
-         break;
       }
       default:
       {

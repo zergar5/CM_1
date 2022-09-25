@@ -1,39 +1,39 @@
 ﻿#pragma once
-#include "MatrixManager.hpp"
+#include "profile_matrix_manager.hpp"
 #include <vector>
 #include <string>
 
-template<typename real>
-class Matrix
+template<typename Real>
+class matrix
 {
 protected:
-   int n;
+   int n_;
 
-   std::vector<int> ia;
-   std::vector<real> di;
-   std::vector<real> al;
-   std::vector<real> au;
+   std::vector<int> ia_;
+   std::vector<Real> di_;
+   std::vector<Real> al_;
+   std::vector<Real> au_;
 public:
-   Matrix()
+   matrix()
    {
-      this->n = 0;
-      this->ia = std::vector<int>();
-      this->di = std::vector<real>();
-      this->al = std::vector<real>();
-      this->au = std::vector<real>();
+      this->n_ = 0;
+      this->ia_ = std::vector<int>();
+      this->di_ = std::vector<Real>();
+      this->al_ = std::vector<Real>();
+      this->au_ = std::vector<Real>();
    }
 
-   virtual void MemoryAllocation(std::string fileName)
+   virtual void memory_allocation(std::string file_name)
    {
-      MatrixManager<Matrix<real>> matrix;
-      matrix.Reader(*this, fileName);
+      profile_matrix_manager<matrix<Real>> matrix;
+      matrix.reader(*this, file_name);
    }
 
-   template<typename realSum>
-   void LDUDecomposition()
+   template<typename RealSum>
+   void ldu_decomposition()
    {
-      real eps = 0;
-      if (typeid(real) == typeid(float))
+      Real eps = 0;
+      if (typeid(Real) == typeid(float))
       {
          eps = FLT_EPSILON;
       }
@@ -41,35 +41,35 @@ public:
       {
          eps = DBL_EPSILON;
       }
-      for (auto element : di)
+      for (auto element : di_)
       {
          if (abs(element) < eps)
          {
             throw std::exception(u8"Матрица не разложима");
          }
       }
-      for (int i = 0; i < n; i++)
+      for (int i = 0; i < n_; i++)
       {
-         int i0 = ia[i];
-         int i1 = ia[i + 1];
+         const int i0 = ia_[i];
+         const int i1 = ia_[i + 1];
          int j = i - (i1 - i0);
-         realSum sum_d = 0;
+         RealSum sum_d = 0;
 
          for (int ij = i0; ij < i1; ij++, j++)
          {
-            realSum sum_l = 0;
-            realSum sum_u = 0;
+            RealSum sum_l = 0;
+            RealSum sum_u = 0;
 
-            int j0 = ia[j];
-            int j1 = ia[j + 1];
+            const int j0 = ia_[j];
+            const int j1 = ia_[j + 1];
 
             int ik = i0;
             int kk = i - (i1 - i0);
             int kj = j0;
 
-            int column_i = ij - i0;
-            int column_j = j1 - j0;
-            int column_ij = column_i - column_j;
+            const int column_i = ij - i0;
+            const int column_j = j1 - j0;
+            const int column_ij = column_i - column_j;
 
             if (column_ij < 0)
                kj -= column_ij;
@@ -81,68 +81,68 @@ public:
 
             for (; ik < ij; ik++, kk++, kj++)
             {
-               sum_l += al[ik] * au[kj] * di[kk];
-               sum_u += al[kj] * au[ik] * di[kk];
+               sum_l += al_[ik] * au_[kj] * di_[kk];
+               sum_u += al_[kj] * au_[ik] * di_[kk];
             }
-            al[ij] = (al[ij] - sum_l) / di[j];
-            au[ij] = (au[ij] - sum_u) / di[j];
-            sum_d += al[ij] * au[ij] * di[j];
+            al_[ij] = (al_[ij] - sum_l) / di_[j];
+            au_[ij] = (au_[ij] - sum_u) / di_[j];
+            sum_d += al_[ij] * au_[ij] * di_[j];
          }
-         if (abs(di[i] - sum_d) < eps)
+         if (abs(di_[i] - sum_d) < eps)
          {
             throw std::exception(u8"Нельзя разложить матрицу в LDU, так как на диагонали присутствует 0");
          }
-         di[i] -= sum_d;
+         di_[i] -= sum_d;
       }
    }
 
-   void setSize(int n)
+   void set_size(int n)
    {
-      this->n = n;
+      this->n_ = n;
    }
 
-   int& getSize()
+   int& get_size()
    {
-      return this->n;
+      return this->n_;
    }
 
-   void setIA(std::vector<int>& ia)
+   void set_ia(std::vector<int>& ia)
    {
-      this->ia = ia;
+      this->ia_ = ia;
    }
 
-   std::vector<int>& getIA()
+   std::vector<int>& get_ia()
    {
-      return this->ia;
+      return this->ia_;
    }
 
-   void setDI(std::vector<real>& di)
+   void set_di(std::vector<Real>& di)
    {
-      this->di = di;
+      this->di_ = di;
    }
 
-   std::vector<real>& getDI()
+   std::vector<Real>& get_di()
    {
-      return this->di;
+      return this->di_;
    }
 
-   void setAL(std::vector<real>& al)
+   void set_al(std::vector<Real>& al)
    {
-      this->al = al;
+      this->al_ = al;
    }
 
-   std::vector<real>& getAL()
+   std::vector<Real>& get_al()
    {
-      return this->al;
+      return this->al_;
    }
 
-   void setAU(std::vector<real>& au)
+   void set_au(std::vector<Real>& au)
    {
-      this->au = au;
+      this->au_ = au;
    }
 
-   std::vector<real>& getAU()
+   std::vector<Real>& get_au()
    {
-      return this->au;
+      return this->au_;
    }
 };

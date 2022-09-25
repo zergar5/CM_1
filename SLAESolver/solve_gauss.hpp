@@ -1,16 +1,15 @@
 #pragma once
-#include "Matrixk.hpp"
-#include "SolveSLAE.hpp"
-#include "VectorManager.hpp"
+#include "gauss_matrix.hpp"
+#include "solve_slae.hpp"
+#include "vector_manager.hpp"
 #include <iostream>
 
-template <typename real>
-void SolveK()
+template <typename Real>
+void solve_gauss()
 {
    while (true)
    {
       int p = 0;
-
       std::cout << u8"Выберите точность суммы: " << std::endl
          << u8"1. float" << std::endl
          << u8"2. double" << std::endl
@@ -29,11 +28,10 @@ void SolveK()
          std::string vector_file_name;
          std::cin >> vector_file_name;
 
-         MatrixK<real> matrix_k = MatrixK<real>();
-         matrix_k.setK(k);
+         gauss_matrix<Real> g_matrix = gauss_matrix<Real>();
          try
          {
-            matrix_k.MemoryAllocation(matrix_file_name + ".txt");
+            g_matrix.memory_allocation(matrix_file_name + ".txt");
          }
          catch (const char* msg)
          {
@@ -41,53 +39,49 @@ void SolveK()
             return;
          }
 
-         std::vector<real> vector_b;
-         VectorManager<std::vector<real>> vector_manager;
+         std::vector<Real> vector_b;
+         vector_manager<std::vector<Real>> vector_manager;
          try
          {
-            vector_manager.Reader(vector_b, matrix_file_name + ".txt", vector_file_name + ".txt");
+            vector_manager.reader(vector_b, matrix_file_name + ".txt", vector_file_name + ".txt");
          }
          catch (const char* msg)
          {
             std::cout << msg << std::endl;
             return;
          }
+         g_matrix.step_view(vector_b);
 
-         matrix_k.LDUDecomposition<float>();
+         std::vector<Real> vector_x;
+         vector_x.resize(g_matrix.get_n());
 
-         SolveSLAE<float> solve_slae;
-         auto vector_x = solve_slae.Solve(matrix_k, vector_b);
+         solve_slae<float> solve_slae;
+         solve_slae.calc_x(g_matrix, vector_b, vector_x);
 
-         if (typeid(real) == typeid(float))
+         if (typeid(Real) == typeid(float))
          {
-            vector_manager.Writer(vector_x, "outputK" + std::to_string(k) + ".txt", 7);
+            vector_manager.writer(vector_x, "gaussoutput.txt", 7);
          }
          else
          {
-            vector_manager.Writer(vector_x, "outputK" + std::to_string(k) + ".txt", 15);
+            vector_manager.writer(vector_x, "gaussoutput.txt", 15);
          }
-
          break;
       }
       case 2:
       {
          std::cout << u8"Введите имя файла матрицы без txt" << std::endl;
-         std::string matrix_file_name;
+         std::string matrix_file_name = "gaussk10";
          std::cin >> matrix_file_name;
 
          std::cout << u8"Введите имя файла вектора без txt" << std::endl;
-         std::string vector_file_name;
+         std::string vector_file_name = "gaussFk10";
          std::cin >> vector_file_name;
 
-         std::cout << u8"Введите k" << std::endl;
-         int k = 0;
-         std::cin >> k;
-
-         MatrixK<real> matrix_k = MatrixK<real>();
-         matrix_k.setK(k);
+         gauss_matrix<Real> g_matrix = gauss_matrix<Real>();
          try
          {
-            matrix_k.MemoryAllocation(matrix_file_name + ".txt");
+            g_matrix.memory_allocation(matrix_file_name + ".txt");
          }
          catch (const char* msg)
          {
@@ -95,33 +89,34 @@ void SolveK()
             return;
          }
 
-         std::vector<real> vector_b;
-         VectorManager<std::vector<real>> vector_manager;
+         std::vector<Real> vector_b;
+         vector_manager<std::vector<Real>> vector_manager;
          try
          {
-            vector_manager.Reader(vector_b, matrix_file_name + ".txt", vector_file_name + ".txt");
+            vector_manager.reader(vector_b, matrix_file_name + ".txt", vector_file_name + ".txt");
          }
          catch (const char* msg)
          {
             std::cout << msg << std::endl;
             return;
          }
-         vector_b[0] += pow(10.0, -k);
 
-         matrix_k.LDUDecomposition<double>();
+         g_matrix.step_view(vector_b);
 
-         SolveSLAE<double> solve_slae;
-         auto vector_x = solve_slae.Solve(matrix_k, vector_b);
+         std::vector<Real> vector_x;
+         vector_x.resize(g_matrix.get_n());
 
-         if (typeid(real) == typeid(float))
+         solve_slae<double> solve_slae;
+         solve_slae.calc_x(g_matrix, vector_b, vector_x);
+
+         if (typeid(Real) == typeid(float))
          {
-            vector_manager.Writer(vector_x, "outputK" + std::to_string(k) + ".txt", 7);
+            vector_manager.writer(vector_x, "gaussoutput.txt", 7);
          }
          else
          {
-            vector_manager.Writer(vector_x, "outputK" + std::to_string(k) + ".txt", 15);
+            vector_manager.writer(vector_x, "gaussoutput.txt", 15);
          }
-
          break;
       }
       case 3:

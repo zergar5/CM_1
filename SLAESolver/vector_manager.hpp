@@ -1,20 +1,20 @@
 ﻿#pragma once
-#include "FileManager.hpp"
+#include "file_manager.hpp"
 #include <vector>
 #include <fstream>
 #include <iomanip>
 
 template<class T>
-class VectorManager : FileManager<T>
+class vector_manager : file_manager<T>
 {
 public:
-   virtual void Reader(T& obj, std::string fileName) { }
-   void Reader(T& obj, std::string fileNameForSize, std::string fileName) override
+   virtual void reader(T& obj, std::string file_name) { }
+   void reader(T& obj, std::string file_name_for_size, std::string file_name) override
    {
       int n = 0;
       try
       {
-         auto vec_size_in = std::ifstream(fileNameForSize);
+         auto vec_size_in = std::ifstream(file_name_for_size);
          vec_size_in >> n;
          obj.resize(n);
       }
@@ -24,7 +24,7 @@ public:
       }
       try
       {
-         auto vec_in = std::ifstream(fileName);
+         auto vec_in = std::ifstream(file_name);
          for (int i = 0; i < n; i++)
          {
             vec_in >> obj[i];
@@ -36,9 +36,9 @@ public:
       }
    }
 
-   void Writer(T& obj, std::string fileName, int precision) override
+   void writer(T& obj, std::string file_name, int precision) override
    {
-      auto vec_out = std::ofstream(fileName);
+      auto vec_out = std::ofstream(file_name);
       vec_out << std::fixed << std::setprecision(precision + 1);
       for (auto element : obj)
       {

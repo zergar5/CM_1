@@ -1,24 +1,24 @@
 ﻿#pragma once
-#include "FileManager.hpp"
-#include "Matrix.hpp"
+#include "file_manager.hpp"
+#include "matrix.hpp"
 #include <fstream>
 #include <vector>
 
 template<class T>
-class MatrixManager : FileManager<T>
+class profile_matrix_manager : file_manager<T>
 {
 public:
-   virtual void Reader(T& obj, std::string fileNameForSize, std::string fileName) { }
-   void Reader(T& obj, std::string fileName) override
+   virtual void reader(T& obj, std::string file_name_for_size, std::string file_name) { }
+   void reader(T& obj, std::string file_name) override
    {
       try
       {
-         auto matrix_in = std::ifstream(fileName);
+         auto matrix_in = std::ifstream(file_name);
          int n = 0;
          matrix_in >> n;
-         obj.setSize(n);
+         obj.set_size(n);
 
-         auto& ia = obj.getIA();
+         auto& ia = obj.get_ia();
          ia.resize(n + 1);
          for (int i = 0; i < n + 1; i++)
          {
@@ -26,21 +26,21 @@ public:
             --ia[i];
          }
 
-         auto& di = obj.getDI();
+         auto& di = obj.get_di();
          di.resize(n);
          for (int i = 0; i < n; i++)
          {
             matrix_in >> di[i];
          }
 
-         auto& al = obj.getAL();
+         auto& al = obj.get_al();
          al.resize(ia[n]);
          for (int i = 0; i < ia[n]; i++)
          {
             matrix_in >> al[i];
          }
 
-         auto& au = obj.getAU();
+         auto& au = obj.get_au();
          au.resize(ia[n]);
          for (int i = 0; i < ia[n]; i++)
          {
@@ -52,5 +52,5 @@ public:
          throw "Error with matrix file";
       }
    }
-   virtual void Writer(T& obj, std::string fileName, int precision) { }
+   virtual void writer(T& obj, std::string file_name, int precision) { }
 };

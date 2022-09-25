@@ -133,23 +133,27 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Fk10.txt" />
+    <Text Include="gaussk10.txt" />
+    <Text Include="gaussFk10.txt" />
+    <Text Include="gaussoutput.txt" />
+    <Text Include="matrixk10.txt" />
     <Text Include="output.txt" />
     <Text Include="profile_matrix.txt" />
-    <Text Include="profile_matrix2.txt" />
-    <Text Include="random_matrix.txt" />
     <Text Include="vector.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FileManager.hpp" />
-    <ClInclude Include="GilbertMatrix.hpp" />
-    <ClInclude Include="Matrix.hpp" />
-    <ClInclude Include="MatrixK.hpp" />
-    <ClInclude Include="MatrixManager.hpp" />
-    <ClInclude Include="Solve.hpp" />
-    <ClInclude Include="SolveGilbert.hpp" />
-    <ClInclude Include="SolveK.hpp" />
-    <ClInclude Include="SolveSLAE.hpp" />
-    <ClInclude Include="VectorManager.hpp" />
+    <ClInclude Include="file_manager.hpp" />
+    <ClInclude Include="gauss_matrix.hpp" />
+    <ClInclude Include="gilbert_matrix.hpp" />
+    <ClInclude Include="matrix.hpp" />
+    <ClInclude Include="matrix_manager.hpp" />
+    <ClInclude Include="profile_matrix_manager.hpp" />
+    <ClInclude Include="solve.hpp" />
+    <ClInclude Include="solve_gauss.hpp" />
+    <ClInclude Include="solve_gilbert.hpp" />
+    <ClInclude Include="solve_slae.hpp" />
+    <ClInclude Include="vector_manager.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

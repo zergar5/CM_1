@@ -29,39 +29,45 @@
     <Text Include="profile_matrix.txt" />
     <Text Include="vector.txt" />
     <Text Include="output.txt" />
-    <Text Include="profile_matrix2.txt" />
-    <Text Include="random_matrix.txt" />
+    <Text Include="Fk10.txt" />
+    <Text Include="matrixk10.txt" />
+    <Text Include="gaussk10.txt" />
+    <Text Include="gaussFk10.txt" />
+    <Text Include="gaussoutput.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Solve.hpp">
+    <ClInclude Include="solve.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Matrix.hpp">
+    <ClInclude Include="matrix.hpp">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="FileManager.hpp">
+    <ClInclude Include="file_manager.hpp">
       <Filter>Tools</Filter>
     </ClInclude>
-    <ClInclude Include="MatrixManager.hpp">
+    <ClInclude Include="profile_matrix_manager.hpp">
       <Filter>Tools</Filter>
     </ClInclude>
-    <ClInclude Include="SolveSLAE.hpp">
+    <ClInclude Include="solve_slae.hpp">
       <Filter>Tools</Filter>
     </ClInclude>
-    <ClInclude Include="VectorManager.hpp">
+    <ClInclude Include="vector_manager.hpp">
       <Filter>Tools</Filter>
     </ClInclude>
-    <ClInclude Include="GilbertMatrix.hpp">
+    <ClInclude Include="gilbert_matrix.hpp">
       <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="SolveGilbert.hpp">
+    <ClInclude Include="solve_gilbert.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="SolveK.hpp">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="MatrixK.hpp">
+    <ClInclude Include="gauss_matrix.hpp">
       <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="matrix_manager.hpp">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="solve_gauss.hpp">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

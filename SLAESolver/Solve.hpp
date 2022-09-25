@@ -1,11 +1,11 @@
 #pragma once
-#include "Matrix.hpp"
-#include "SolveSLAE.hpp"
-#include "VectorManager.hpp"
+#include "matrix.hpp"
+#include "solve_slae.hpp"
+#include "vector_manager.hpp"
 #include <iostream>
 
-template <typename real>
-void Solve()
+template <typename Real>
+void solve()
 {
    while (true)
    {
@@ -28,10 +28,10 @@ void Solve()
          std::string vector_file_name;
          std::cin >> vector_file_name;
 
-         Matrix<real> profile_matrix = Matrix<real>();
+         matrix<Real> profile_matrix = matrix<Real>();
          try
          {
-            profile_matrix.MemoryAllocation(matrix_file_name + ".txt");
+            profile_matrix.memory_allocation(matrix_file_name + ".txt");
          }
          catch (const char* msg)
          {
@@ -39,11 +39,11 @@ void Solve()
             return;
          }
 
-         std::vector<real> vector_b;
-         VectorManager<std::vector<real>> vector_manager;
+         std::vector<Real> vector_b;
+         vector_manager<std::vector<Real>> vector_manager;
          try
          {
-            vector_manager.Reader(vector_b, matrix_file_name + ".txt", vector_file_name + ".txt");
+            vector_manager.reader(vector_b, matrix_file_name + ".txt", vector_file_name + ".txt");
          }
          catch (const char* msg)
          {
@@ -51,20 +51,20 @@ void Solve()
             return;
          }
 
-         std::vector<real> vector_x;
+         std::vector<Real> vector_x;
 
-         profile_matrix.LDUDecomposition<float>();
+         profile_matrix.ldu_decomposition<float>();
 
-         SolveSLAE<float> solve_slae;
-         vector_x = solve_slae.Solve(profile_matrix, vector_b);
+         solve_slae<float> solve_slae;
+         vector_x = solve_slae.solve(profile_matrix, vector_b);
 
-         if (typeid(real) == typeid(float))
+         if (typeid(Real) == typeid(float))
          {
-            vector_manager.Writer(vector_x, "output.txt", 7);
+            vector_manager.writer(vector_x, "output.txt", 7);
          }
          else
          {
-            vector_manager.Writer(vector_x, "outputK.txt", 15);
+            vector_manager.writer(vector_x, "output.txt", 15);
          }
 
          break;
@@ -79,10 +79,10 @@ void Solve()
          std::string vector_file_name;
          std::cin >> vector_file_name;
 
-         Matrix<real> profile_matrix = Matrix<real>();
+         matrix<Real> profile_matrix = matrix<Real>();
          try
          {
-            profile_matrix.MemoryAllocation(matrix_file_name + ".txt");
+            profile_matrix.memory_allocation(matrix_file_name + ".txt");
          }
          catch (const char* msg)
          {
@@ -90,11 +90,11 @@ void Solve()
             return;
          }
 
-         std::vector<real> vector_b;
-         VectorManager<std::vector<real>> vector_manager;
+         std::vector<Real> vector_b;
+         vector_manager<std::vector<Real>> vector_manager;
          try
          {
-            vector_manager.Reader(vector_b, matrix_file_name + ".txt", vector_file_name + ".txt");
+            vector_manager.reader(vector_b, matrix_file_name + ".txt", vector_file_name + ".txt");
          }
          catch (const char* msg)
          {
@@ -102,20 +102,20 @@ void Solve()
             return;
          }
 
-         std::vector<real> vector_x;
+         std::vector<Real> vector_x;
 
-         profile_matrix.LDUDecomposition<double>();
+         profile_matrix.ldu_decomposition<double>();
 
-         SolveSLAE<double> solve_slae;
-         vector_x = solve_slae.Solve(profile_matrix, vector_b);
+         solve_slae<double> solve_slae;
+         vector_x = solve_slae.solve(profile_matrix, vector_b);
 
-         if (typeid(real) == typeid(float))
+         if (typeid(Real) == typeid(float))
          {
-            vector_manager.Writer(vector_x, "output.txt", 7);
+            vector_manager.writer(vector_x, "output.txt", 7);
          }
          else
          {
-            vector_manager.Writer(vector_x, "output.txt", 15);
+            vector_manager.writer(vector_x, "output.txt", 15);
          }
 
          break;
