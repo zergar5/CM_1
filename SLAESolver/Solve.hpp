@@ -28,10 +28,10 @@ void solve()
          std::string vector_file_name;
          std::cin >> vector_file_name;
 
-         matrix<Real> profile_matrix = matrix<Real>();
+         Matrix<Real> profile_matrix = Matrix<Real>();
          try
          {
-            profile_matrix.memory_allocation(matrix_file_name + ".txt");
+            profile_matrix.MemoryAllocation(matrix_file_name + ".txt");
          }
          catch (const char* msg)
          {
@@ -40,10 +40,10 @@ void solve()
          }
 
          std::vector<Real> vector_b;
-         vector_manager<std::vector<Real>> vector_manager;
+         VectorManager<std::vector<Real>> vector_manager;
          try
          {
-            vector_manager.reader(vector_b, matrix_file_name + ".txt", vector_file_name + ".txt");
+            vector_manager.Read(vector_b, matrix_file_name + ".txt", vector_file_name + ".txt");
          }
          catch (const char* msg)
          {
@@ -53,18 +53,18 @@ void solve()
 
          std::vector<Real> vector_x;
 
-         profile_matrix.ldu_decomposition<float>();
+         profile_matrix.LDUDecomposition<float>();
 
-         solve_slae<float> solve_slae;
-         vector_x = solve_slae.solve(profile_matrix, vector_b);
+         SolveSlae<float> solve_slae;
+         vector_x = solve_slae.Solve(profile_matrix, vector_b);
 
          if (typeid(Real) == typeid(float))
          {
-            vector_manager.writer(vector_x, "output.txt", 7);
+            vector_manager.Write(vector_x, "output.txt", 7);
          }
          else
          {
-            vector_manager.writer(vector_x, "output.txt", 15);
+            vector_manager.Write(vector_x, "output.txt", 15);
          }
 
          break;
@@ -79,10 +79,10 @@ void solve()
          std::string vector_file_name;
          std::cin >> vector_file_name;
 
-         matrix<Real> profile_matrix = matrix<Real>();
+         Matrix<Real> profile_matrix = Matrix<Real>();
          try
          {
-            profile_matrix.memory_allocation(matrix_file_name + ".txt");
+            profile_matrix.MemoryAllocation(matrix_file_name + ".txt");
          }
          catch (const char* msg)
          {
@@ -91,10 +91,10 @@ void solve()
          }
 
          std::vector<Real> vector_b;
-         vector_manager<std::vector<Real>> vector_manager;
+         VectorManager<std::vector<Real>> vector_manager;
          try
          {
-            vector_manager.reader(vector_b, matrix_file_name + ".txt", vector_file_name + ".txt");
+            vector_manager.Read(vector_b, matrix_file_name + ".txt", vector_file_name + ".txt");
          }
          catch (const char* msg)
          {
@@ -104,18 +104,18 @@ void solve()
 
          std::vector<Real> vector_x;
 
-         profile_matrix.ldu_decomposition<double>();
+         profile_matrix.LDUDecomposition<double>();
 
-         solve_slae<double> solve_slae;
-         vector_x = solve_slae.solve(profile_matrix, vector_b);
+         SolveSlae<double> solve_slae;
+         vector_x = solve_slae.Solve(profile_matrix, vector_b);
 
          if (typeid(Real) == typeid(float))
          {
-            vector_manager.writer(vector_x, "output.txt", 7);
+            vector_manager.Write(vector_x, "output.txt", 7);
          }
          else
          {
-            vector_manager.writer(vector_x, "output.txt", 15);
+            vector_manager.Write(vector_x, "output.txt", 15);
          }
 
          break;

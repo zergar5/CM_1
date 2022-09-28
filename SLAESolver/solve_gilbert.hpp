@@ -31,11 +31,11 @@ void solve_gilbert()
             break;
          }
 
-         gilbert_matrix<Real> g_matrix = gilbert_matrix<Real>();
-         g_matrix.set_k(k);
+         GilbertMatrix<Real> g_matrix = GilbertMatrix<Real>();
+         g_matrix.setK(k);
          try
          {
-            g_matrix.generate();
+            g_matrix.Generate();
          }
          catch (const char* msg)
          {
@@ -43,24 +43,24 @@ void solve_gilbert()
             return;
          }
 
-         std::vector<Real> vector_b = g_matrix.generate_vector_fk();
-         g_matrix.convert_to_prof();
+         std::vector<Real> vector_b = g_matrix.GenerateVectorFk();
+         g_matrix.ConvertToProf();
 
          std::vector<Real> vector_x;
 
-         g_matrix.ldu_decomposition<float>();
+         g_matrix.LDUDecomposition<float>();
 
-         solve_slae<float> solve_slae;
-         vector_x = solve_slae.solve(g_matrix, vector_b);
+         SolveSlae<float> solve_slae;
+         vector_x = solve_slae.Solve(g_matrix, vector_b);
 
-         vector_manager<std::vector<Real>> vector_manager;
+         VectorManager<std::vector<Real>> vector_manager;
          if (typeid(Real) == typeid(float))
          {
-            vector_manager.writer(vector_x, "outputGilbert" + std::to_string(k) + ".txt", 7);
+            vector_manager.Write(vector_x, "outputGilbert" + std::to_string(k) + ".txt", 7);
          }
          else
          {
-            vector_manager.writer(vector_x, "outputGilbert" + std::to_string(k) + ".txt", 15);
+            vector_manager.Write(vector_x, "outputGilbert" + std::to_string(k) + ".txt", 15);
          }
          break;
       }
@@ -76,11 +76,11 @@ void solve_gilbert()
             break;
          }
 
-         gilbert_matrix<Real> g_matrix = gilbert_matrix<Real>();
-         g_matrix.set_k(k);
+         GilbertMatrix<Real> g_matrix = GilbertMatrix<Real>();
+         g_matrix.setK(k);
          try
          {
-            g_matrix.generate();
+            g_matrix.Generate();
          }
          catch (const char* msg)
          {
@@ -88,24 +88,24 @@ void solve_gilbert()
             return;
          }
 
-         std::vector<Real> vector_b = g_matrix.generate_vector_fk();
-         g_matrix.convert_to_prof();
+         std::vector<Real> vector_b = g_matrix.GenerateVectorFk();
+         g_matrix.ConvertToProf();
 
          std::vector<Real> vector_x;
 
-         g_matrix.ldu_decomposition<double>();
+         g_matrix.LDUDecomposition<double>();
 
-         solve_slae<double> solve_slae;
-         vector_x = solve_slae.solve(g_matrix, vector_b);
+         SolveSlae<double> solve_slae;
+         vector_x = solve_slae.Solve(g_matrix, vector_b);
 
-         vector_manager<std::vector<Real>> vector_manager;
+         VectorManager<std::vector<Real>> vector_manager;
          if (typeid(Real) == typeid(float))
          {
-            vector_manager.writer(vector_x, "outputGilbert" + std::to_string(k) + ".txt", 7);
+            vector_manager.Write(vector_x, "outputGilbert" + std::to_string(k) + ".txt", 7);
          }
          else
          {
-            vector_manager.writer(vector_x, "outputGilbert" + std::to_string(k) + ".txt", 15);
+            vector_manager.Write(vector_x, "outputGilbert" + std::to_string(k) + ".txt", 15);
          }
          break;
       }

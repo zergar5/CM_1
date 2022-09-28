@@ -5,11 +5,11 @@
 #include <iomanip>
 
 template<class T>
-class vector_manager : file_manager<T>
+class VectorManager : FileManager<T>
 {
 public:
-   virtual void reader(T& obj, std::string file_name) { }
-   void reader(T& obj, std::string file_name_for_size, std::string file_name) override
+   virtual void Read(T& obj, std::string file_name) { }
+   void Read(T& obj, std::string file_name_for_size, std::string file_name) override
    {
       int n = 0;
       try
@@ -36,7 +36,7 @@ public:
       }
    }
 
-   void writer(T& obj, std::string file_name, int precision) override
+   void Write(T& obj, std::string file_name, int precision) override
    {
       auto vec_out = std::ofstream(file_name);
       vec_out << std::fixed << std::setprecision(precision + 1);

@@ -28,10 +28,10 @@ void solve_gauss()
          std::string vector_file_name;
          std::cin >> vector_file_name;
 
-         gauss_matrix<Real> g_matrix = gauss_matrix<Real>();
+         GaussMatrix<Real> g_matrix = GaussMatrix<Real>();
          try
          {
-            g_matrix.memory_allocation(matrix_file_name + ".txt");
+            g_matrix.MemoryAllocation(matrix_file_name + ".txt");
          }
          catch (const char* msg)
          {
@@ -40,10 +40,10 @@ void solve_gauss()
          }
 
          std::vector<Real> vector_b;
-         vector_manager<std::vector<Real>> vector_manager;
+         VectorManager<std::vector<Real>> vector_manager;
          try
          {
-            vector_manager.reader(vector_b, matrix_file_name + ".txt", vector_file_name + ".txt");
+            vector_manager.Read(vector_b, matrix_file_name + ".txt", vector_file_name + ".txt");
          }
          catch (const char* msg)
          {
@@ -53,18 +53,18 @@ void solve_gauss()
          g_matrix.step_view(vector_b);
 
          std::vector<Real> vector_x;
-         vector_x.resize(g_matrix.get_n());
+         vector_x.resize(g_matrix.getN());
 
-         solve_slae<float> solve_slae;
-         solve_slae.calc_x(g_matrix, vector_b, vector_x);
+         SolveSlae<float> solve_slae;
+         solve_slae.CalcX(g_matrix, vector_b, vector_x);
 
          if (typeid(Real) == typeid(float))
          {
-            vector_manager.writer(vector_x, "gaussoutput.txt", 7);
+            vector_manager.Write(vector_x, "gaussoutput.txt", 7);
          }
          else
          {
-            vector_manager.writer(vector_x, "gaussoutput.txt", 15);
+            vector_manager.Write(vector_x, "gaussoutput.txt", 15);
          }
          break;
       }
@@ -78,10 +78,10 @@ void solve_gauss()
          std::string vector_file_name = "gaussFk10";
          std::cin >> vector_file_name;
 
-         gauss_matrix<Real> g_matrix = gauss_matrix<Real>();
+         GaussMatrix<Real> g_matrix = GaussMatrix<Real>();
          try
          {
-            g_matrix.memory_allocation(matrix_file_name + ".txt");
+            g_matrix.MemoryAllocation(matrix_file_name + ".txt");
          }
          catch (const char* msg)
          {
@@ -90,10 +90,10 @@ void solve_gauss()
          }
 
          std::vector<Real> vector_b;
-         vector_manager<std::vector<Real>> vector_manager;
+         VectorManager<std::vector<Real>> vector_manager;
          try
          {
-            vector_manager.reader(vector_b, matrix_file_name + ".txt", vector_file_name + ".txt");
+            vector_manager.Read(vector_b, matrix_file_name + ".txt", vector_file_name + ".txt");
          }
          catch (const char* msg)
          {
@@ -104,18 +104,18 @@ void solve_gauss()
          g_matrix.step_view(vector_b);
 
          std::vector<Real> vector_x;
-         vector_x.resize(g_matrix.get_n());
+         vector_x.resize(g_matrix.getN());
 
-         solve_slae<double> solve_slae;
-         solve_slae.calc_x(g_matrix, vector_b, vector_x);
+         SolveSlae<double> solve_slae;
+         solve_slae.CalcX(g_matrix, vector_b, vector_x);
 
          if (typeid(Real) == typeid(float))
          {
-            vector_manager.writer(vector_x, "gaussoutput.txt", 7);
+            vector_manager.Write(vector_x, "gaussoutput.txt", 7);
          }
          else
          {
-            vector_manager.writer(vector_x, "gaussoutput.txt", 15);
+            vector_manager.Write(vector_x, "gaussoutput.txt", 15);
          }
          break;
       }

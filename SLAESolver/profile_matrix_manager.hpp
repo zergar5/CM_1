@@ -5,20 +5,20 @@
 #include <vector>
 
 template<class T>
-class profile_matrix_manager : file_manager<T>
+class profile_matrix_manager : FileManager<T>
 {
 public:
-   virtual void reader(T& obj, std::string file_name_for_size, std::string file_name) { }
-   void reader(T& obj, std::string file_name) override
+   virtual void Read(T& obj, std::string file_name_for_size, std::string file_name) { }
+   void Read(T& obj, std::string file_name) override
    {
       try
       {
          auto matrix_in = std::ifstream(file_name);
          int n = 0;
          matrix_in >> n;
-         obj.set_size(n);
+         obj.setSize(n);
 
-         auto& ia = obj.get_ia();
+         auto& ia = obj.getIA();
          ia.resize(n + 1);
          for (int i = 0; i < n + 1; i++)
          {
@@ -26,21 +26,21 @@ public:
             --ia[i];
          }
 
-         auto& di = obj.get_di();
+         auto& di = obj.getDI();
          di.resize(n);
          for (int i = 0; i < n; i++)
          {
             matrix_in >> di[i];
          }
 
-         auto& al = obj.get_al();
+         auto& al = obj.getAL();
          al.resize(ia[n]);
          for (int i = 0; i < ia[n]; i++)
          {
             matrix_in >> al[i];
          }
 
-         auto& au = obj.get_au();
+         auto& au = obj.getAU();
          au.resize(ia[n]);
          for (int i = 0; i < ia[n]; i++)
          {
@@ -52,5 +52,5 @@ public:
          throw "Error with matrix file";
       }
    }
-   virtual void writer(T& obj, std::string file_name, int precision) { }
+   virtual void Write(T& obj, std::string file_name, int precision) { }
 };

@@ -3,15 +3,15 @@
 #include "matrix_manager.hpp"
 
 template<class Real>
-class gauss_matrix
+class GaussMatrix
 {
    int n_ = 0;
    std::vector<std::vector<Real>> gauss_matrix_;
 public:
-   void memory_allocation(std::string file_name)
+   void MemoryAllocation(std::string file_name)
    {
-      matrix_manager<gauss_matrix<Real>> matrix_manager;
-      matrix_manager.reader(*this, file_name);
+      MatrixManager<GaussMatrix<Real>> matrix_manager;
+      matrix_manager.Read(*this, file_name);
    }
 
    void step_view(std::vector<Real>& b)
@@ -59,22 +59,22 @@ public:
       }
    }
 
-   void set_n(int n)
+   void setN(int n)
    {
       this->n_ = n;
    }
 
-   int& get_n()
+   int& getN()
    {
       return this->n_;
    }
 
-   void set_matrix(std::vector<std::vector<Real>>& gauss_matrix)
+   void setMatrix(std::vector<std::vector<Real>>& gauss_matrix)
    {
       this->gauss_matrix_ = gauss_matrix;
    }
 
-   std::vector<std::vector<Real>>& get_matrix()
+   std::vector<std::vector<Real>>& getMatrix()
    {
       return this->gauss_matrix_;
    }

@@ -4,7 +4,7 @@
 #include <string>
 
 template<typename Real>
-class matrix
+class Matrix
 {
 protected:
    int n_;
@@ -14,7 +14,7 @@ protected:
    std::vector<Real> al_;
    std::vector<Real> au_;
 public:
-   matrix()
+   Matrix()
    {
       this->n_ = 0;
       this->ia_ = std::vector<int>();
@@ -23,14 +23,14 @@ public:
       this->au_ = std::vector<Real>();
    }
 
-   virtual void memory_allocation(std::string file_name)
+   virtual void MemoryAllocation(std::string file_name)
    {
-      profile_matrix_manager<matrix<Real>> matrix;
-      matrix.reader(*this, file_name);
+      profile_matrix_manager<Matrix<Real>> matrix;
+      matrix.Read(*this, file_name);
    }
 
    template<typename RealSum>
-   void ldu_decomposition()
+   void LDUDecomposition()
    {
       Real eps = 0;
       if (typeid(Real) == typeid(float))
@@ -90,58 +90,58 @@ public:
          }
          if (abs(di_[i] - sum_d) < eps)
          {
-            throw std::exception(u8"Нельзя разложить матрицу в LDU, так как на диагонали присутствует 0");
+            throw std::exception(u8"Матрица не разложима");
          }
          di_[i] -= sum_d;
       }
    }
 
-   void set_size(int n)
+   void setSize(int n)
    {
       this->n_ = n;
    }
 
-   int& get_size()
+   int& getSize()
    {
       return this->n_;
    }
 
-   void set_ia(std::vector<int>& ia)
+   void setIA(std::vector<int>& ia)
    {
       this->ia_ = ia;
    }
 
-   std::vector<int>& get_ia()
+   std::vector<int>& getIA()
    {
       return this->ia_;
    }
 
-   void set_di(std::vector<Real>& di)
+   void setDI(std::vector<Real>& di)
    {
       this->di_ = di;
    }
 
-   std::vector<Real>& get_di()
+   std::vector<Real>& getDI()
    {
       return this->di_;
    }
 
-   void set_al(std::vector<Real>& al)
+   void setAL(std::vector<Real>& al)
    {
       this->al_ = al;
    }
 
-   std::vector<Real>& get_al()
+   std::vector<Real>& getAL()
    {
       return this->al_;
    }
 
-   void set_au(std::vector<Real>& au)
+   void setAU(std::vector<Real>& au)
    {
       this->au_ = au;
    }
 
-   std::vector<Real>& get_au()
+   std::vector<Real>& getAU()
    {
       return this->au_;
    }

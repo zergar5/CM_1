@@ -2,11 +2,11 @@
 #include <vector>
 
 template<typename RealSum>
-class solve_slae
+class SolveSlae
 {
 public:
    template<class V>
-   static void calc_y(std::vector<int>& ia, V& al, V& vec_b, V& vec_y)
+   static void CalcY(std::vector<int>& ia, V& al, V& vec_b, V& vec_y)
    {
       const int n = vec_b.size();
 
@@ -26,7 +26,7 @@ public:
    }
 
    template<class V>
-   static void calc_z(V& di, V& vec_y, V& vec_z)
+   static void CalcZ(V& di, V& vec_y, V& vec_z)
    {
       const int n = vec_y.size();
 
@@ -37,7 +37,7 @@ public:
    }
 
    template<class V>
-   static void calc_x(std::vector<int>& ia, V& au, V& vec_z, V& vec_x)
+   static void CalcX(std::vector<int>& ia, V& au, V& vec_z, V& vec_x)
    {
       const int n = vec_z.size();
 
@@ -54,11 +54,11 @@ public:
    }
 
    template<class M, class V>
-   static void calc_x(M& matrix, V& b, V& x)
+   static void CalcX(M& matrix, V& b, V& x)
    {
-      auto n = matrix.get_n();
+      auto n = matrix.getN();
       x.resize(n);
-      auto& g_matrix = matrix.get_matrix();
+      auto& g_matrix = matrix.getMatrix();
 
       for (int i = n - 1; i >= 0; --i)
       {
@@ -72,18 +72,18 @@ public:
    }
 
    template<class M, class V>
-   V solve(M& matrix, V& vec)
+   V Solve(M& matrix, V& vec)
    {
       auto& y = vec;
       auto& z = y;
       auto& x = z;
-      auto& ia = matrix.get_ia();
-      auto& al = matrix.get_al();
-      calc_y(ia, al, vec, y);
-      auto& di = matrix.get_di();
-      calc_z(di, y, z);
-      auto& au = matrix.get_au();
-      calc_x(ia, au, z, x);
+      auto& ia = matrix.getIA();
+      auto& al = matrix.getAL();
+      CalcY(ia, al, vec, y);
+      auto& di = matrix.getDI();
+      CalcZ(di, y, z);
+      auto& au = matrix.getAU();
+      CalcX(ia, au, z, x);
       return x;
    }
 };

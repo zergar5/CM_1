@@ -1,6 +1,6 @@
 #include "CppUnitTest.h"
 #include "../SLAESolver/solve_slae.hpp"
-#include "../SLAESolver/matrix.hpp"
+#include "../SLAESolver/Matrix.hpp"
 #include "../SLAESolver/gilbert_matrix.hpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -19,7 +19,7 @@ namespace UnitTests
          std::vector<float> b = { 1, 4, 18, 49, 100 };
 
          auto& y = b;
-         solve_slae<float>::calc_y<std::vector<float>>(ia, L, b, y);
+         SolveSlae<float>::CalcY<std::vector<float>>(ia, L, b, y);
 
          for (int i = 0; i < y.size(); i++)
          {
@@ -35,7 +35,7 @@ namespace UnitTests
          std::vector<float> y = { 1, 4, 9, 16, 25 };
 
          auto& z = y;
-         solve_slae<float>::calc_z<std::vector<float>>(D, y, z);
+         SolveSlae<float>::CalcZ<std::vector<float>>(D, y, z);
 
          for (int i = 0; i < z.size(); i++)
          {
@@ -53,7 +53,7 @@ namespace UnitTests
 
          auto& x = z;
 
-         solve_slae<float>::calc_x<std::vector<float>>(ia, U, z, x);
+         SolveSlae<float>::CalcX<std::vector<float>>(ia, U, z, x);
 
          for (int i = 0; i < x.size(); i++)
          {
@@ -66,26 +66,26 @@ namespace UnitTests
    {
       TEST_METHOD(LDUDecompositionTest)
       {
-         matrix<float> matrixA;
+         Matrix<float> matrixA;
          int n = 5;
-         matrixA.set_size(n);
+         matrixA.setSize(n);
 
          std::vector<int> ia = { 0, 0, 1, 3, 5, 7 };
-         matrixA.set_ia(ia);
+         matrixA.setIA(ia);
 
          std::vector<float> di = { 1, 2, 3, 4, 5 };
-         matrixA.set_di(di);
+         matrixA.setDI(di);
 
          std::vector<float> al = { 6, 8, 0, 10, 0, 12, 0 };
-         matrixA.set_al(al);
+         matrixA.setAL(al);
 
          std::vector<float> au = { 7, 9, 0, 11, 0, 13, 0, };
-         matrixA.set_au(au);
+         matrixA.setAU(au);
 
-         matrixA.ldu_decomposition<float>();
+         matrixA.LDUDecomposition<float>();
 
-         matrix<float> matrixLDU;
-         matrixLDU.set_size(n);
+         Matrix<float> matrixLDU;
+         matrixLDU.setSize(n);
 
          di = { 1, -40, 6.6f, -24.75f, 11.4462776f };
 
@@ -93,21 +93,21 @@ namespace UnitTests
 
          au = { 7, 9, 1.35f, -0.275f, -2.33333373f, 1.96969748f, -1.07438016f };
 
-         auto D = matrixA.get_di();
+         auto D = matrixA.getDI();
 
          for (int i = 0; i < n; i++)
          {
             Assert::AreEqual(D[i], di[i], 10e-6f);
          }
 
-         auto L = matrixA.get_al();
+         auto L = matrixA.getAL();
 
          for (int i = 0; i < ia[n]; i++)
          {
             Assert::AreEqual(L[i], al[i], 10e-6f);
          }
 
-         auto U = matrixA.get_au();
+         auto U = matrixA.getAU();
 
          for (int i = 0; i < ia[n]; i++)
          {
@@ -117,46 +117,46 @@ namespace UnitTests
 
       TEST_METHOD(LDUZeroOnDiagonalExceptionTest)
       {
-         matrix<float> matrixA;
+         Matrix<float> matrixA;
          int n = 5;
-         matrixA.set_size(n);
+         matrixA.setSize(n);
 
          std::vector<int> ia = { 0, 0, 1, 2, 3, 4 };
-         matrixA.set_ia(ia);
+         matrixA.setIA(ia);
 
          std::vector<float> di = { 0, 1, 1, 1, 1 };
-         matrixA.set_di(di);
+         matrixA.setDI(di);
 
          std::vector<float> al = { 1, 1, 1, 1 };
-         matrixA.set_al(al);
+         matrixA.setAL(al);
 
          std::vector<float> au = { 1, 1, 1, 1 };
-         matrixA.set_au(au);
+         matrixA.setAU(au);
 
-         auto a = [&] { matrixA.ldu_decomposition<float>(); };
+         auto a = [&] { matrixA.LDUDecomposition<float>(); };
 
          Assert::ExpectException<std::exception>(a);
       }
 
       TEST_METHOD(LDUZeroSumExceptionTest)
       {
-         matrix<float> matrixA;
+         Matrix<float> matrixA;
          int n = 5;
-         matrixA.set_size(n);
+         matrixA.setSize(n);
 
          std::vector<int> ia = { 0, 0, 1, 2, 3, 4 };
-         matrixA.set_ia(ia);
+         matrixA.setIA(ia);
 
          std::vector<float> di = { 1, 1, 1, 1, 1 };
-         matrixA.set_di(di);
+         matrixA.setDI(di);
 
          std::vector<float> al = { 1, 1, 1, 1 };
-         matrixA.set_al(al);
+         matrixA.setAL(al);
 
          std::vector<float> au = { 1, 1, 1, 1 };
-         matrixA.set_au(au);
+         matrixA.setAU(au);
 
-         auto a = [&] { matrixA.ldu_decomposition<float>(); };
+         auto a = [&] { matrixA.LDUDecomposition<float>(); };
 
          Assert::ExpectException<std::exception>(a);
       }
@@ -166,16 +166,16 @@ namespace UnitTests
    {
       TEST_METHOD(ConvertToProfTest)
       {
-         gilbert_matrix<float> gilbert_matrix;
+         GilbertMatrix<float> GilbertMatrix;
          int k = 3;
-         gilbert_matrix.set_k(k);
-         gilbert_matrix.generate();
-         gilbert_matrix.convert_to_prof();
+         GilbertMatrix.setK(k);
+         GilbertMatrix.Generate();
+         GilbertMatrix.ConvertToProf();
 
-         auto ia = gilbert_matrix.get_ia();
-         auto di = gilbert_matrix.get_di();
-         auto al = gilbert_matrix.get_al();
-         auto au = gilbert_matrix.get_au();
+         auto ia = GilbertMatrix.getIA();
+         auto di = GilbertMatrix.getDI();
+         auto al = GilbertMatrix.getAL();
+         auto au = GilbertMatrix.getAU();
 
          std::vector<int> actual_ia = { 0, 0, 1, 3 };
 
